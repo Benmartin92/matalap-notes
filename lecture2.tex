@@ -1,0 +1,95 @@
+\subsection{A $0$-rendű logika szemantikája}
+\begin{defi}[interpretáció, kiértékelés]{A $k:\lbrace \text{ítéletváltozók} \rbrace \rightarrow \lbrace i, h \rbrace$} függvényt interpretációnak vagy változókiértékelésnek nevezzük.
+\end{defi}
+\subsubsection{A logikai műveletek jelentése}
+\begin{displaymath}
+\begin{array}{|c|c||c|c|c|c|c}
+   x
+ & y
+ & \lnot{}x
+ & x\land{}y
+ & x\lor{}y
+ & x\Rightarrow y
+ & x\Leftrightarrow{}y \\
+\hline
+i & i & h & i & i & i & i \\
+i & h & h & h & i & h & h \\
+h & i & i & h & i & i & h \\
+h & h & i & h & h & i & i \\
+\hline
+\end{array}
+\end{displaymath}
+\subsubsection{Formulák jelentése}
+\begin{defi}[Az igazság definíciója]{Legyen $k$ egy értékelés $\varphi$ pedig egy $0$-rendű formula. Jelölje $k \models \varphi$ azt, hogy $\varphi$ igaz $k$-ban ($k$ értékelés mellett.) 
+$$k \models \varphi, \text{ ha } 
+\begin{cases}
+k(\varphi) = i, & \varphi \text{ ítéletváltozó} \\
+k \not\models \psi, & \varphi = \lnot \psi \\
+k \models \psi_1 \text{ és } k \models \psi_2, & \varphi = \psi_1 \land \psi_2 \\
+... & ...
+\end{cases}$$}
+\end{defi}
+A kipontozott részek a 2.1.1-ben lévő táblázat szerint folytatódnak.
+\begin{megj}
+Összetett formula jelentése (igazsága) kiszámolható a részei jelentéséből (igazságából).
+\end{megj}
+\subsection{Az 1-rendű formulák szemantikája}
+\begin{defi}[1-rendű struktúra]
+$\mathcal{A} = (A,f_i^\mathcal{A},R_j^\mathcal{A},C_k^\mathcal{A})_{i \in I, j \in J, k \in K}$, ahol $A$ nemüres alaphalmaz és minden $i \in I$, $j \in J$ és $k \in K$-ra: $f_i^{\rho(i)} : A \rightarrow A$ egy $\rho(i)$-változós függvény, $R_j \subseteq A^{\delta(j)}$ egy $\delta(j)$-változós reláció, valamint $C^{\mathcal{A}}_k \in A$ egy konstans. $I, J, K$ üres, véges vagy végtelen. Egy struktúra típusát $(I,J,K,\rho,\delta)$-val adjuk meg.
+\end{defi}
+
+\begin{exmpl}
+\begin{minipage}[t]{\linewidth}
+\begin{enumerate}
+\item Minden csoport (gyűrű, háló) struktúra.
+\item Minden részbenrendezett halmaz struktúra.
+\item Minden gráf struktúra.
+\item $\mathcal{N} := ( \mathbb{N}, +, \cdot, =, \leqslant, 0,1)$, ahol $+,\cdot, =, \leqslant$ a szokásos műveletek, relációk egy struktúra.
+\end{enumerate}
+\end{minipage}
+\end{exmpl}
+
+\begin{defi} Legyen $L$ egy $1$-rendű nyelv. Az $\mathcal{A}$ struktúra az $L$ nyelv egy modellje, ha $\mathcal{A}$ és $L$ típusa azonos.
+\end{defi}
+\begin{defi}Legyen $\mathcal{A}$ az $L$ nyelv modellje. Egy $k: \lbrace \text{változók} \rbrace \rightarrow \mathcal{A}$ függvényt az $\mathcal{A}$ feletti (ki)értékelésnek nevezzük.
+\end{defi}
+\begin{defi}[Termek jelentése] Legyen $k$ egy $\mathcal{A}$ feletti értékelés és $t$ egy term. Ekkor $t$ jelentése $\mathcal{A}$-ban $k$ értékelés mellett
+$$t^\mathcal{A}[k] := 
+\begin{cases}
+k(t), & \text{ ha $t$ változó} \\
+c, & \text{ ha $t=c$ konstans} \\
+f(t^{\mathcal{A}}_1[k], t^{\mathcal{A}}_2[k], \ldots, t^{\mathcal{A}}_n[k]), & \text{ ha $t = f(t_1, t_2, \ldots, t_n)$}
+\end{cases}
+$$
+\end{defi}
+\begin{defi} Legyenek $k, k'$ értékelések, $x$ pedig egy változó. Azt mondjuk, hogy $k$ és $k'$ $x$-közel vannak egymáshoz (és azt írjuk, hogy $k \stackrel{x}{\equiv} k'$), ha minden $y$-ra: $x \neq y$ $\Rightarrow$ $k(y)=k'(y)$.
+\end{defi}
+\begin{defi} Legyen $\varphi$ egy formula, $\mathcal{A}$ struktúra, $k$ pedig egy $\mathcal{A}$ feletti értékelés. Azt mondjuk, hogy $\varphi$ igaz $\mathcal{A}$-ban $k$ értékelés mellett, akkor és csak akkor:
+$$
+\mathcal{A} \models \varphi[k] = 
+\begin{cases}
+t^{\mathcal{A}}_1[k] = t^{\mathcal{A}}_2[k], & \text{ ha $\varphi =$ ''$t_1 = t_2$''} \\
+(t^\mathcal{A}_1[k], \ldots, t^{\mathcal{A}}_n[k]) \in R^{\mathcal{A}}, & \text{ ha $\varphi = R(t_1, \ldots, t_2)$} \\
+\text{Mint $0$-rendben,} & \text{ ha $\varphi =$ ''$\lnot \psi$'', $\varphi =$ ''$\psi_1 \lor \psi_2$'', stb.} \\
+\text{Létezik olyan $k \stackrel{x}{\equiv} k'$,}& \text{ ha $\varphi =$ ''$\exists x \psi$'', akkor $\mathcal{A} \models \psi[k']$ } \\
+\text{Minden $k' \stackrel{x}{\equiv} k$-ra $\mathcal{A} \models \psi[k']$,} & \text{ ha $\varphi =$ ''$\forall x \psi.$''}
+\end{cases}
+$$
+\end{defi}
+\begin{defi}
+$\mathcal{A} \models \varphi$, ha minden $\mathcal{A}$ feletti $k$ értékelésre $\mathcal{A} \models \varphi[k]$.
+\end{defi}
+\begin{defi} Legyen $k$ struktúraosztály, $\Sigma$ pedig formulahalmaz. $k \models \Sigma \Leftrightarrow (\forall \mathcal{A} \in k)(\forall \varphi \in \Sigma)(\mathcal{A} \models \varphi)$.
+\end{defi}
+\begin{defi} Legyen $\Sigma$ $0$- vagy $1$-rendű formulahalmaz $\varphi$ formula a megfelelő rendben. Azt mondjuk, hogy $\Sigma$-ból következik $\varphi$ és azt írjuk, hogy $\Sigma \models \varphi$, ha
+\begin{itemize}
+\item $0$-rendben: minden $k$ értékelésre, ha $k \models \Sigma$ ($\Sigma$ összes eleme igaz $k$ mellett), akkor $k \models \varphi$,
+\item $1$-rendben: minden $\mathcal{A}$ struktúrára, ha $\mathcal{A} \models \Sigma$, akkor $\mathcal{A} \models \varphi$.
+\end{itemize}
+\end{defi}
+\begin{exmpl} 
+\begin{itemize}
+\item $\mathbb{Q}, \mathbb{C}$ racionális és komplex számok gyűrűje mellett legyen $\varphi = \exists x(x\cdot x = -1)$, ekkor $\mathbb{Q} \not\models \varphi$, viszont $\mathbb{C} \models \varphi$.
+\item Ha megadunk egy olyan $k$ értékelést, amire $k(x)=5$, akkor a $\mathbb{Q} \models (x = 5)[k]$ igaz lesz, viszont egy másik $l$ értékelés mellett, amire $x$ változóhoz $0$-át rendelünk, azaz $l(x)=0$, már $\mathbb{Q} \not\models (x = 5)[l]$ adódik.
+\end{itemize}
+\end{exmpl}

@@ -1,0 +1,80 @@
+\begin{defi}[Elősorrend] Ami előrébb van a listán, az köt erősebben: 
+$$\frac{\forall}{\exists}, \lnot, \frac{\lor}{\land}, \Rightarrow, \Leftrightarrow.$$
+\end{defi}
+Például $\exists x \varphi \land \psi$ azt jelenti, hogy $(\exists x \varphi) \land \psi$. Az implikációs láncokat mindig jobbra zárójelezzük: $\varphi \Rightarrow \psi \Rightarrow \rho$ azt jelenti, hogy $\varphi \Rightarrow (\psi \Rightarrow \rho)$.
+\subsubsection{Műveletek kapcsolatai}
+\begin{defi} Az $f: \lbrace i, h \rbrace^n \rightarrow \lbrace i, h \rbrace$ alakú függvényeket logikai műveleteknek nevezzük. (Az $n$ változós logikai műveletek száma: $2^{2^n}$)
+\end{defi}
+\begin{defi} Logikai műveletek egy $F$ halmaza funkcionálisan teljes, ha $F$ segítségével az összes $\lbrace i, h \rbrace^n \rightarrow \lbrace i,h \rbrace$ logikai függvény előállítható.
+\end{defi}
+\begin{theo}
+Az $\lbrace \lnot, \land, \lor \rbrace$ művelethalmaz funkcionálisan teljes.
+\end{theo}
+Most megadunk egy $f$ logikai függvényt (műveletet) igazságtáblázatával.
+\begin{displaymath}
+\begin{array}{|c|c|c||c}
+   x
+ & y
+ & z
+ & f(x,y,z) \\
+\hline
+h & h & h & h \\
+h & h & i & i \\
+h & i & h & i \\
+h & i & i & h \\
+i & h & h & h \\
+i & h & i & h \\
+i & i & h & h \\
+i & i & i & i \\
+\hline
+\end{array}
+\end{displaymath}
+Tekintsük a következő formulákat:
+\begin{itemize}
+\item $\varphi_2 = \lnot x \land \lnot y \land z$
+\item $\varphi_3 = \lnot x \land y \land  \lnot z$
+\item $\varphi_8 = x \land y \land z$
+\end{itemize}
+Az egyes formulák csak az indexükben jelzett sorhoz tartozó bemenetre vesznek fel igaz értéket, tehát $\varphi = \varphi_2 \lor \varphi_3 \lor \varphi_8$ megvalósítja $f$-et. \\
+\indent Következzen a 3.1 tétel bizonyítása.
+\begin{proof}
+Legyen $n \in \mathbb{N}$ és $f: \lbrace i, h \rbrace^n \rightarrow \lbrace i, h \rbrace$ tetszőleges, ha $\underline{s} \in \lbrace i, h \rbrace ^n$, akkor legyen:
+$$
+x_j^{(\underline{s})} =
+\begin{cases}
+x_j, & \text{ ha $s_j = i$} \\
+\lnot x_j, & \text{ ha $s_j = h$}.
+\end{cases}
+$$
+Ekkor
+$$\varphi = \bigvee_{\forall \underline{s} : f(\underline{s}) = i} \left( \bigwedge^n_{i=1} x^{(\underline{s})}_i \right),$$
+és $f \equiv \varphi$, hiszen $\bigwedge^n_{i=1} x^{(\underline{s})}_i$ mindig csak az adott $\underline{s}$ mellett igaz (az előző példához hasonlóan). Az $f$ függvény ezen előállítását diszjunktív normálformának nevezzük (rövidítve: DNF). \\
+\indent Mivel a DNF csak a kitüntetett $\lbrace \lnot, \lor, \land \rbrace$ művelethalmaz logikai függvényeit használja, ezért az valóban funkcionálisan teljes. \qed \\
+\indent Egy másik bizonyításhoz definiáljuk a konjunktív normálformát (KNF). Legyen
+$$
+x_{j(\underline{s})} =
+\begin{cases}
+\lnot x_j, & \text{ ha $s_j = i$} \\
+x_j, & \text{ ha $s_j = h$}
+\end{cases},
+$$
+ekkor
+$$\psi = \bigwedge_{\forall \underline{s} : f(\underline{s}) = h} \left( \bigvee^n_{i=1} x^{(\underline{s})}_i \right)$$
+az $f$ függvény KNF-es előállítása, ez teljesül, hiszen $\bigvee^n_{i=1} x^{(\underline{s})}_i$ csak a megadott $\underline{s}$ mellett hamis, így $\psi \equiv f$ itt is. A KNF is csak a kitüntetett művelethalmaz elemeit használja. Ezzel befejeztük a másik bizonyítást is.
+\end{proof}
+\begin{megj}
+$\lnot, \land, \lor$ logikai áramkörökkel megvalósíthatók. Ha az áramköri elemeknek költsége van és $f$ kevésszer igaz, akkor DNF, ha kevésszer hamis, akkor KNF alkalmazása a célszerű. A minimális (pl.: legkevesebb logikai függvényt tartalmazó) megvalósítás megkeresése NP-teljes probléma.
+\end{megj}
+\begin{defi} Legyenek $\varphi$ és $\psi$ formulák. Azt írjuk, hogy $\varphi \equiv \psi$, ha minden $k$ értékelésre $k \models \varphi$ akkor és csak akkor, ha $k \models \psi$.
+\end{defi}
+\begin{exmpl} $\varphi = \lnot \lnot \varphi$.
+\end{exmpl}
+\begin{theo} A $\lbrace \lnot, \land \rbrace$ művelethalmaz funkcionálisan teljes.
+\end{theo}
+\begin{proof} Kell, hogy $\varphi \lor \psi$ kifejezhető $\lbrace \lnot, \land \rbrace$ halmazzal, utána 3.1 tételből következik az állítás.
+$\varphi \lor \psi \equiv \lnot \lnot (\varphi \lor \psi) \equiv \lnot (\lnot \varphi \land \lnot \psi)$. Utolsó lépésben egy De Morgan-azonosságot alkalmaztunk.
+\end{proof}
+\begin{theo} $\lbrace \lnot, \lor \rbrace$ is az.
+\end{theo}
+\begin{proof} Ugyanúgy mint előbb. $\varphi \land \psi \equiv \lnot(\lnot \varphi \lor \lnot \psi)$.
+\end{proof}
