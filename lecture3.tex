@@ -69,12 +69,78 @@ $\lnot, \land, \lor$ logikai áramkörökkel megvalósíthatók. Ha az áramkör
 \end{defi}
 \begin{exmpl} $\varphi = \lnot \lnot \varphi$.
 \end{exmpl}
-\begin{theo} A $\lbrace \lnot, \land \rbrace$ művelethalmaz funkcionálisan teljes.
-\end{theo}
+\begin{state} A $\lbrace \lnot, \land \rbrace$ művelethalmaz funkcionálisan teljes.
+\end{state}
 \begin{proof} Kell, hogy $\varphi \lor \psi$ kifejezhető $\lbrace \lnot, \land \rbrace$ halmazzal, utána 3.1 tételből következik az állítás.
 $\varphi \lor \psi \equiv \lnot \lnot (\varphi \lor \psi) \equiv \lnot (\lnot \varphi \land \lnot \psi)$. Utolsó lépésben egy De Morgan-azonosságot alkalmaztunk.
 \end{proof}
-\begin{theo} $\lbrace \lnot, \lor \rbrace$ is az.
+\begin{state} $\lbrace \lnot, \lor \rbrace$ és $\lbrace \lnot, \Rightarrow \rbrace$ is funkcionálisan teljes művelethalmazok.
+\end{state}
+\begin{proof} Első halmaz: ugyanúgy mint előbb. $\varphi \land \psi \equiv \lnot(\lnot \varphi \lor \lnot \psi)$. Második halmazra: igazságtáblával igazolható, hogy $\varphi \lor \psi \equiv \lnot \varphi \Rightarrow \psi$.
+\end{proof}
+\begin{fairytale} $\lbrace \lnot \rbrace$ nem funkcionálisan teljes.
+\end{fairytale}
+\begin{defi}[Sheffer-féle sem-sem művelet, NAND]
+\begin{displaymath}
+\begin{array}{|c|c||c}
+   x
+ & y
+ & x \mid y  \\
+\hline
+h & h & h \\
+h & i & h \\
+i & i & h \\
+h & h & i \\
+\hline
+\end{array}
+\end{displaymath}
+\end{defi}
+\begin{state}
+$\lbrace \mid \rbrace$ funkcionálisan teljes.
+\end{state}
+\begin{proof}
+$\lnot x \equiv x \mid x$ és $x \lor y \equiv \lnot (x \mid y) \equiv (x \mid y) \mid (x \mid y)$, 3.2. állítás miatt ez is funkcionálisan teljes.
+\end{proof}
+\begin{state}Legyen $\varphi$ tetszőleges formula, ekkor van olyan DNF vagy KNF alakú $\varphi'$, hogy $\varphi \equiv \varphi'$.
+\end{state}
+\begin{proof} Legyen $t$ a $\varphi$ igazságtáblája 3.1. tétel miatt $\varphi$ leírható $\psi$ KNF-el vagy DNF-el és nyilván $\varphi \equiv \psi$.
+\end{proof}
+\begin{defi}[Szabadon előforduló változó] A $v$ változó előfordulása $\varphi$-ben szabad, ha az adott előfordulásban nincs $v$-re vonatkozó kvantor hatáskörében. A $v$ szabad $\varphi$-ben, ha $v$-nek van szabad előfordulása $\varphi$-ben.
+\end{defi}
+\begin{exmpl} $\forall x P(x) \Rightarrow R(x,y)$-ban $y$ szabad előfordulású.  $\forall x \forall y (xy = yx)$ ebben pedig nincs szabad előfordulású változó.
+\end{exmpl}
+\begin{state} Legyen $t$ egy term, $k$ és $k'$ olyan értékelések, hogy $t$ minden $v$ változójára $k(v) = k'(v)$, akkor $t^\mathcal{A}[k] = t^{\mathcal{A}}[k']$, azaz $t$ jelentése csak a benne előforduló változóktól függ.
+\end{state}
+\begin{proof}$t$ összetettsége szerinti indukcióval bizonyítunk. 
+Ha $t$ konstans szimbólum, akkor nyilvánvalóan $t^\mathcal{A}[k] = t^{\mathcal{A}}[k']$. Ha $t$ változó, akkor $t^\mathcal{A}[k] = k(t) = k'(t) = t^{\mathcal{A}}[k']$. Tegyük fel, hogy $t = f(t_1,t_2,\ldots,t_{n})$ és az állítást már tudjuk $t_1,t_2,\ldots,t_{n}$-re, ekkor $t^\mathcal{A}[k] = f^\mathcal{A}(t^\mathcal{A}_1[k],\ldots,t^\mathcal{A}_n[k]) = f^\mathcal{A}(t^\mathcal{A}_1[k'],\ldots,t^\mathcal{A'}_n[k]) = t^\mathcal{A}[k']$.
+\end{proof}
+\begin{theo} Legyen $\varphi$ 1.-rendű formula, $\mathcal{A}$ struktúra $k$ pedig egy $\mathcal{A}$ feletti értékelés. $\mathcal{A} \models \varphi[k]$ csak a $\varphi$-ben szabadon előforduló változóktól függ, azaz ha $k'$ egy olyan értékelés, hogy minden $v$ szabad változóra $\varphi$-ben: $k(v)=k'(v)$, akkor $\mathcal{A} \models \varphi[k]$ akkor és csak akkor, ha $\mathcal{A} \models \varphi[k']$.
 \end{theo}
-\begin{proof} Ugyanúgy mint előbb. $\varphi \land \psi \equiv \lnot(\lnot \varphi \lor \lnot \psi)$.
+\begin{proof}
+Ha $\varphi = t_1 = t_2$, akkor $\mathcal{A} \models (t_1 = t_2)[k] \leftrightarrow t^\mathcal{A}_1[k] = t^{\mathcal{A}}_2[k] \leftrightarrow $ 3.5. állítás miatt $t^\mathcal{A}[k']_1 = t_2^\mathcal{A}[k'] \leftrightarrow \mathcal{A} \models (t_1 = t_2)[k']$. Ha $\varphi = R(t_1,\ldots,t_n)$, akkor $\mathcal{A} \models R(t_1,\ldots,t_n)[k] \leftrightarrow (t_1^\mathcal{A}[k],\ldots,t_n^{\mathcal{A}}[k]) \in R^{\mathcal{A}} \leftrightarrow \mathcal{A} \models R(t_1,\ldots,t_n)[k']$, ismét a 3.5. állítást használva. \\
+\indent Következzen az indukciós lépés: tegyük fel, hogy az állítás igaz $\varphi$-re, $\psi$-re. Elég megmutatni, hogy az állítás igaz marad $\lnot \varphi$-re, $\varphi \land \psi$-re (3.1. állítás miatt ez így már funkcionálisan teljes) és $\exists v \varphi$-re is. Ha utóbbiak teljesülnek, akkor $\forall v \varphi \equiv \lnot \lnot \forall v \varphi \equiv \lnot (\exists v \lnot \varphi)$ miatt $\forall v \varphi$-re is igaz lesz. Tehát mindennel együtt tetszőleges 1.-rendű formulára igaz lesz. \\
+\indent $\varphi$-ről $\lnot \varphi$-re való áttérés:
+\begin{equation*}
+\begin{split}
+\mathcal{A}& \models \lnot \varphi[k] \leftrightarrow \mathcal{A} \not\models \varphi[k] \\
+&\stackrel{\text{ind.}}{\leftrightarrow} \\
+\mathcal{A}& \not \models \varphi[k'] \leftrightarrow \mathcal{A} \models \lnot \varphi[k'].
+\end{split}
+\end{equation*}
+\indent $\varphi, \psi$-ről $\varphi \land \psi$-re való áttérés:
+\begin{equation*}
+\begin{split}
+\mathcal{A} &\models (\varphi \land \psi)[k] \leftrightarrow \mathcal{A} \models \varphi[k] \text{ és } \mathcal{A} \models \psi[k] \\
+&\stackrel{\text{ind.}}{\leftrightarrow} \\
+\mathcal{A}& \models \varphi[k'] \text{ és } \mathcal{A} \models \psi[k'] \leftrightarrow \mathcal{A} \models (\varphi \land \psi)[k']. 
+\end{split}
+\end{equation*}
+\indent $\varphi$-ről $\exists v \varphi$-re való áttérés:
+$\mathcal{A} \models \exists v \varphi[k] \leftrightarrow$ van $k^* \stackrel{v}{\equiv} k$ értékelés, amelyre $\mathcal{A} \models \varphi[k']$. Legyen
+$$k^*'(x) = 
+\begin{cases}
+k'(x), & \text{ ha } x \neq v \\
+k^*(x) & \text{ különben.}
+\end{cases}$$
+A $\varphi$ szabad változóin $k^*$ és $k^*'$ értékei megegyeznek. Az indukció miatt $\mathcal{A} \models \exists v \varphi[k]$ akkor csak akkor, ha $\mathcal{A} \models \varphi[k^*'] \leftrightarrow \mathcal{A} \models \exists v \varphi[k']$, mert $k' \stackrel{v}{\equiv} k^*'$.
 \end{proof}
