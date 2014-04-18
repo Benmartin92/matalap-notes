@@ -1,5 +1,5 @@
 \subsection{Bizonyításelmélet}
-\begin{defi}[Az ítéletkalkulus axióma-séma]
+\begin{defi}[Az ítéletkalkulus axióma-sémái]
 \begin{minipage}[t]{\linewidth}
 \begin{Axiom}
 \item $\alpha \Rightarrow (\beta \Rightarrow \alpha)$ \label{axi:one}
@@ -12,7 +12,7 @@ ahol $\alpha, \beta, \gamma$ formulaváltozók.
 \begin{megj}
 A $\lbrace \lnot, \Rightarrow \rbrace$ művelethalmaz funkcionálisan teljes és feltesszük, hogy formuláinkban csak ezek fordulnak elő. Mostantól (amíg mást nem mondunk) az ítéletkalkulusban dolgozunk.
 \end{megj}
-\begin{defi}[Következtetési szabály, Modus Ponens, jel.: $\mathtt{MP}$] $$\frac{\alpha, \alpha \Rightarrow \beta}{\beta}$$ Ez azt jelenti, hogy ha van egy $\alpha \Rightarrow \beta$ formulánk és rendelkezésünkre áll $\alpha$, akkor $\mathtt{MP}$-vel előáll $\beta$ is.
+\begin{defi}[Következtetési szabály, Modus Ponens, jel.: $\mathtt{MP}$] $$\frac{\alpha, \alpha \Rightarrow \beta}{\beta}$$ Ez azt jelenti, hogy ha rendelkezésünkre áll $\alpha \Rightarrow \beta$ formula és az $\alpha$, akkor $\mathtt{MP}$-vel előáll $\beta$ is.
 \end{defi}
 \begin{defi}
 Legyen $\Sigma$ formulahalmaz és $\varphi$ formula. Azt írjuk, hogy $\Sigma \vdash \varphi$ (és azt mondjuk, hogy $\Sigma$-ból levezethető $\varphi$), ha van a formuláknak egy olyan véges $\alpha_1, \alpha_2, \ldots, \alpha_n$ sorozata úgy, hogy $\alpha_n = \varphi$ és minden $i \leqslant n$-re $\alpha_i$-re teljesül, hogy:
@@ -23,12 +23,12 @@ Legyen $\Sigma$ formulahalmaz és $\varphi$ formula. Azt írjuk, hogy $\Sigma \v
 \end{itemize} 
 \end{defi}
 \begin{megj}
-Az előző definícióban szereplő $\alpha_1, \alpha_2, \ldots, \alpha_n$ $\varphi$ egy $\Sigma$-beli levezetése. Algoritmikusan ellenőrizhető, hogy az adott $\alpha_1, \alpha_2, \ldots, \alpha_n$ bizonyítása-e $\varphi$-nek.
+Az előző definícióban szereplő $\alpha_1, \alpha_2, \ldots, \alpha_n$ sorozat $\varphi$ egy $\Sigma$-beli levezetése. Algoritmikusan ellenőrizhető, hogy az adott $\alpha_1, \alpha_2, \ldots, \alpha_n$ levezetése-e $\varphi$-nek.
 \end{megj}
 \begin{exmpl} $\emptyset \vdash \varphi \Rightarrow \varphi$, ahol $\varphi$ tetszőleges rögzített formula.
 \begin{proof}
 \begin{tabular}{ l c r }
-  1. & $(\varphi \Rightarrow (\varphi \Rightarrow \varphi)) \Rightarrow (\varphi \Rightarrow (\varphi \Rightarrow \varphi)) \Rightarrow (\varphi \Rightarrow \varphi)$ &  AX2 egy példánya \\
+  1. & $(\varphi \Rightarrow (\varphi \Rightarrow \varphi) \Rightarrow \varphi) \Rightarrow (\varphi \Rightarrow (\varphi \Rightarrow \varphi)) \Rightarrow (\varphi \Rightarrow \varphi)$ &  AX2 egy példánya \\
   2. & $\varphi \Rightarrow (\varphi \Rightarrow \varphi) \Rightarrow \varphi$ & AX1 egy példánya \\
   3. &  $(\varphi \Rightarrow (\varphi \Rightarrow \varphi)) \Rightarrow (\varphi \Rightarrow \varphi)$ & $\texttt{MP}(1,2)$ \\
   4. & $\varphi \Rightarrow (\varphi \Rightarrow \varphi)$ & AX1 egy példánya \\
@@ -37,7 +37,7 @@ Az előző definícióban szereplő $\alpha_1, \alpha_2, \ldots, \alpha_n$ $\var
 \end{proof}
 \end{exmpl}
 \begin{theo}[Teljességi-tétel]
-$\Sigma \models \varphi$ akkor és csak akkor, ha $\Sigma \vdash \varphi$, azaz minden következtetés formálisan bizonyítható.
+$\Sigma \models \varphi$ akkor és csak akkor, ha $\Sigma \vdash \varphi$, azaz minden helyes következtetés formálisan bizonyítható.
 \end{theo}
 \begin{megj} $\Sigma \vdash \varphi$ esetén csak szintaktikus transzformációk kerülnek szóba. Jelentés, igazság fel sem merül.
 \end{megj}
@@ -54,7 +54,7 @@ $\Sigma \models \varphi$ akkor és csak akkor, ha $\Sigma \vdash \varphi$, azaz 
 \end{lem}
 \begin{proof}
 (1) extenzív: Ha $\varphi \in \Sigma$, akkor ''$\varphi$'' levezetése $\varphi$-nek $\Sigma$-ból, tehát $\Sigma \subseteq \ded(\Sigma)$. \\
-\indent (2) monoton: Ha $\varphi \in \ded(\Sigma)$, akkor létezik $\alpha_1, \alpha_2, \ldots, \alpha_n$ véges formulasorozat, hogy $\alpha_n=\varphi$ és minden $i \leqslant n$-re $\alpha_i$ 4.3. definíció szerint áll elő, de akkor ezek egy $\Sigma \subseteq \Gamma$-ban is benne vannak, tehát $\ded(\Sigma) \subseteq \ded(\Gamma)$. \\
+\indent (2) monoton: Ha $\varphi \in \ded(\Sigma)$, akkor létezik $\alpha_1, \alpha_2, \ldots, \alpha_n$ véges formulasorozat, hogy $\alpha_n=\varphi$ és minden $i \leqslant n$-re $\alpha_i$ 4.3. definíció szerint áll elő, de akkor ugyanez a sorozat egy $\Sigma \subseteq \Gamma$-beli levezetés is, tehát $\ded(\Sigma) \subseteq \ded(\Gamma)$. \\
 \indent (3) idempotens: (1) miatt $\Sigma \subseteq \ded(\Sigma)$, tehát (2) miatt $\ded(\Sigma) \subseteq \ded(\ded(\Sigma))$. Másik tartalmazás: legyen $\varphi \in \ded(\ded(\Sigma))$, ekkor létezik olyan $\alpha_1, \alpha_2, \ldots, \alpha_n = \varphi$ formulasorozat, hogy minden $i \leqslant n$-re $\alpha_i$:
 \begin{itemize}
 \item axióma VAGY
@@ -69,11 +69,11 @@ $\Sigma \models \varphi$ akkor és csak akkor, ha $\Sigma \vdash \varphi$, azaz 
 \end{enumerate}
 \end{theo}
 \begin{proof}
-Először (1) $\Rightarrow$ (2) bizonyítása következik. Tegyük fel, hogy $\Sigma \vdash \varphi \Rightarrow \psi$, ekkor a $\ded$ monotonitása miatt $\Sigma \cup \lbrace \varphi \rbrace \vdash \varphi \Rightarrow \psi$, az extenzivitás miatt pedig $\Sigma \vdash \varphi$. Így $\texttt{MP}$-vel elő tud állni $\psi$, azaz $\Sigma \vdash \psi$. \\
-\indent Most következzen (2) $\Rightarrow$ (1). Tegyük fel, hogy $\alpha_1, \alpha_2, \ldots, \alpha_n$ a $\psi$ levezetése $\Sigma \cup \lbrace \varphi \rbrace$-ből. Egy $i$ szerinti teljes indukcióval belátjuk, hogy $\Sigma \vdash \varphi \Rightarrow \alpha_i$. \\
+Először (1) $\Rightarrow$ (2) bizonyítása következik. Tegyük fel, hogy $\Sigma \vdash \varphi \Rightarrow \psi$, ekkor a $\ded$ monotonitása miatt $\Sigma \cup \lbrace \varphi \rbrace \vdash \varphi \Rightarrow \psi$, az extenzivitás miatt pedig $\Sigma \cup \lbrace \varphi \rbrace \vdash \varphi$. Így $\texttt{MP}$-vel elő tud állni $\psi$, azaz $\Sigma \cup \lbrace \varphi \rbrace \vdash \psi$. \\
+\indent Most következzen (2) $\Rightarrow$ (1). Tegyük fel, hogy $\alpha_1, \alpha_2, \ldots, \alpha_n$ a $\psi$ levezetése $\Sigma \cup \lbrace \varphi \rbrace$-ből, $i$ szerinti teljes indukcióval belátjuk, hogy $\Sigma \vdash \varphi \Rightarrow \alpha_i$ minden $i \leqslant n$-re. \\
 \indent Legyen $i=1$ (3 eset lehetséges), ha $\alpha_1 \in \Sigma$, akkor AX1 alkalmazásával $\Sigma \vdash \alpha_1 \Rightarrow \varphi \Rightarrow \alpha_1$ és mivel $\alpha_1 \in \Sigma$, ezért $\Sigma \vdash \alpha_1$ és így $\varphi \Rightarrow \alpha_1$ $\texttt{MP}$-vel előállítható. \\
 \indent Ha $\alpha_1 = \varphi$, akkor 4.1 példa szerint $\emptyset \vdash \varphi \Rightarrow \varphi$, így a monotonitás miatt $\Sigma \vdash \varphi \Rightarrow \varphi$. \\
-\indent Utolsó esetben, ha $\alpha_1$ axióma, akkor AX1 alkalmazásával $\Sigma \vdash \alpha_1 \Rightarrow \varphi \Rightarrow \varphi_1$ és mivel $\alpha_1$ axióma, ezért $\Sigma \vdash \alpha_1$ és így $\texttt{MP}$-vel előállítható $\varphi \Rightarrow \alpha_1$, azaz $\Sigma \vdash \varphi \Rightarrow \alpha_1$.\\
+\indent Utolsó esetben, ha $\alpha_1$ axióma, akkor AX1 alkalmazásával $\Sigma \vdash \alpha_1 \Rightarrow \varphi \Rightarrow \alpha_1$ és mivel $\alpha_1$ axióma, ezért $\Sigma \vdash \alpha_1$ és így $\texttt{MP}$-vel előállítható $\varphi \Rightarrow \alpha_1$, azaz $\Sigma \vdash \varphi \Rightarrow \alpha_1$.\\
 \indent Az indukciós lépés: \\
 Tegyük fel, hogy minden $j < i$-re tudjuk, hogy $\Sigma \vdash \varphi \Rightarrow \alpha_j$ (kell: $\Sigma \vdash \varphi \Rightarrow \alpha_i$). Amennyiben $\alpha_i$ axióma vagy $\alpha_i \in \Sigma \cup \lbrace \varphi \rbrace$, akkor $i=1$-ben szereplő eljárást kell megismételni. \\
 \indent Amennyiben $\alpha_1$ $\texttt{MP}$-vel áll elő, akkor léteznek olyan $\alpha_k, \alpha_l$ formulák, hogy $k,l < i$ és $\alpha_l = (\alpha_k \Rightarrow \alpha_i)$. Az indukciós feltevés miatt $\Sigma \vdash \varphi \Rightarrow \alpha_l$, azaz 
@@ -81,11 +81,11 @@ Tegyük fel, hogy minden $j < i$-re tudjuk, hogy $\Sigma \vdash \varphi \Rightar
 \begin{split}
 \Sigma &\vdash \varphi \Rightarrow (\alpha_k \Rightarrow \alpha_i) \\
 & \vdash (\varphi \Rightarrow (\alpha_k \Rightarrow \alpha_i)) \Rightarrow (\varphi \Rightarrow \alpha_k) \Rightarrow (\varphi \Rightarrow \alpha_i) \text{ AX2 alkalmazásával} \\
-& \vdash (\varphi \Rightarrow \alpha_k) \Rightarrow (\varphi \Rightarrow \alpha_i) \text{ újból AX2} \\
-& \vdash \varphi \Rightarrow \alpha_i \text{ $\texttt{MP}$-vel első és harmadik sorból.}
+& \vdash (\varphi \Rightarrow \alpha_k) \Rightarrow (\varphi \Rightarrow \alpha_i) \text{ $\texttt{MP}$-vel} \\
+& \vdash (\varphi \Rightarrow \alpha_k) \text{ az indukciós feltevés miatt} \\ 
+& \vdash \varphi \Rightarrow \alpha_i \text{ $\texttt{MP}$-vel}
 \end{split}
 \end{equation*}
-Ezzel beláttuk, ami kellett.
 \end{proof}
 \begin{defi}
 Legyen $\Sigma$ formulahalmaz. $\Sigma$-t ellentmondásosnak nevezzük, ha van olyan $\alpha$, hogy $\Sigma \vdash \alpha$ és $\Sigma \vdash \lnot \alpha$.
@@ -110,7 +110,7 @@ Legyen $\Sigma$ formulahalmaz. $\Sigma$-t ellentmondásosnak nevezzük, ha van o
 & \vdash \varphi \text{ $\texttt{MP}$ kétszer alkalmazva.}
 \end{split}
 \end{equation*}
-Az utolsó Modus Ponens részletezve: 1. és 3. sorból előáll $(\lnot \varphi \Rightarrow \lnot \alpha) \Rightarrow \varphi$ és a most kinyert formulából és 2. sorból előáll $\varphi$. \\
+Az utolsó Modus Ponens részletezve: 1. és 3. sorból előáll $(\lnot \varphi \Rightarrow \lnot \alpha) \Rightarrow \varphi$, ebből és 2. sorból előáll $\varphi$. \\
 \indent 3. $\Rightarrow$ 4. pontosan úgy, mint 1. $\Rightarrow$ 2. \\
 \indent 4. $\Rightarrow$ 3. Tegyük fel, hogy $\Sigma \cup \lbrace \varphi \rbrace$ ellentmondásos. Vegyük észre, hogy $\lbrace \lnot \lnot \varphi, \lnot \varphi \rbrace$ ellentmondásos formulahalmaz, így 2. $\Rightarrow$ 1. miatt $\lnot \lnot \varphi \vdash \varphi$, emiatt $\ded(\Sigma \cup \lbrace \varphi \rbrace) \subseteq \ded(\Sigma \cup \lbrace \lnot \lnot \varphi \rbrace)$ és így $\Sigma \cup \lbrace \lnot \lnot \varphi \rbrace$ is ellentmondásos. Alkalmazva 2. $\Rightarrow$ 1. állítást $\Sigma \vdash \lnot \varphi$, azaz 3. fennáll.
 \end{proof}
