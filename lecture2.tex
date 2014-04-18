@@ -35,7 +35,7 @@ A kipontozott részek a 2.1.1-ben lévő táblázat szerint folytatódnak.
 \end{megj}
 \subsection{Az 1-rendű formulák szemantikája}
 \begin{defi}[1-rendű struktúra]
-$\mathcal{A} = (A,f_i^\mathcal{A},R_j^\mathcal{A},C_k^\mathcal{A})_{i \in I, j \in J, k \in K}$, ahol $A$ nemüres alaphalmaz és minden $i \in I$, $j \in J$ és $k \in K$-ra: $f_i^{\rho(i)} : A \rightarrow A$ egy $\rho(i)$-változós függvény, $R_j \subseteq A^{\delta(j)}$ egy $\delta(j)$-változós reláció, valamint $C^{\mathcal{A}}_k \in A$ egy konstans. $I, J, K$ üres, véges vagy végtelen. Egy struktúra típusát $(I,J,K,\rho,\delta)$-val adjuk meg.
+$\mathcal{A} = (A,f_i^\mathcal{A},R_j^\mathcal{A},C_k^\mathcal{A})_{i \in I, j \in J, k \in K}$, ahol $A$ nemüres alaphalmaz és minden $i \in I$, $j \in J$ és $k \in K$-ra: $f_i^{\rho(i)} : A \rightarrow A$ egy $\rho(i)$-változós függvény, $R_j \subseteq A^{\delta(j)}$ egy $\delta(j)$-változós reláció, valamint $C^{\mathcal{A}}_k \in A$ egy konstans. $I, J, K$ tetszőleges halmaz. Egy struktúra típusát $(I,J,K,\rho,\delta)$-val adjuk meg.
 \end{defi}
 
 \begin{exmpl}
@@ -44,7 +44,7 @@ $\mathcal{A} = (A,f_i^\mathcal{A},R_j^\mathcal{A},C_k^\mathcal{A})_{i \in I, j \
 \item Minden csoport (gyűrű, háló) struktúra.
 \item Minden részbenrendezett halmaz struktúra.
 \item Minden gráf struktúra.
-\item $\mathcal{N} := ( \mathbb{N}, +, \cdot, =, \leqslant, 0,1)$, ahol $+,\cdot, =, \leqslant$ a szokásos műveletek, relációk egy struktúra.
+\item $\mathcal{N} := ( \mathbb{N}, +, \cdot, =, \leqslant, 0,1)$ egy struktúra.
 \end{enumerate}
 \end{minipage}
 \end{exmpl}
@@ -57,8 +57,8 @@ $\mathcal{A} = (A,f_i^\mathcal{A},R_j^\mathcal{A},C_k^\mathcal{A})_{i \in I, j \
 $$t^\mathcal{A}[k] := 
 \begin{cases}
 k(t), & \text{ ha $t$ változó} \\
-c, & \text{ ha $t=c$ konstans} \\
-f(t^{\mathcal{A}}_1[k], t^{\mathcal{A}}_2[k], \ldots, t^{\mathcal{A}}_n[k]), & \text{ ha $t = f(t_1, t_2, \ldots, t_n)$}
+c^\mathcal{A}, & \text{ ha $t=c$ konstans} \\
+f^{\mathcal{A}}(t^{\mathcal{A}}_1[k], t^{\mathcal{A}}_2[k], \ldots, t^{\mathcal{A}}_n[k]), & \text{ ha $t = f(t_1, t_2, \ldots, t_n)$}
 \end{cases}
 $$
 \end{defi}
@@ -79,7 +79,7 @@ $$
 \begin{defi}
 $\mathcal{A} \models \varphi$, ha minden $\mathcal{A}$ feletti $k$ értékelésre $\mathcal{A} \models \varphi[k]$.
 \end{defi}
-\begin{defi} Legyen $k$ struktúraosztály, $\Sigma$ pedig formulahalmaz. $k \models \Sigma \Leftrightarrow (\forall \mathcal{A} \in k)(\forall \varphi \in \Sigma)(\mathcal{A} \models \varphi)$.
+\begin{defi} Legyen $K$ struktúraosztály, $\Sigma$ pedig formulahalmaz. $K \models \Sigma \Leftrightarrow (\forall \mathcal{A} \in K)(\forall \varphi \in \Sigma)(\mathcal{A} \models \varphi)$.
 \end{defi}
 \begin{defi} Legyen $\Sigma$ $0$- vagy $1$-rendű formulahalmaz $\varphi$ formula a megfelelő rendben. Azt mondjuk, hogy $\Sigma$-ból következik $\varphi$ és azt írjuk, hogy $\Sigma \models \varphi$, ha
 \begin{itemize}
