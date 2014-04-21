@@ -1,0 +1,71 @@
+\subsection{Rendszámok}
+\begin{defi}
+$(A, <)$ rendezett halmaz, ha $<$ irreflexív, tranzitív és trichotóm: $(\forall x,y \in A) (x < y \lor x = y \lor y < x)$ (a másik két tulajdonság miatt pont az egyik teljesül).
+\end{defi}
+\begin{defi}
+$(A, <)$ jólrendezés, ha minden nemüres $C \subseteq A \Rightarrow$ $C$-ben van legkisebb elem.
+\end{defi}
+\begin{defi} Legyen $A$ halmaz $\in_{A} = \lbrace \langle a, b \rangle : a, b \in A, a \in b \rbrace$. $(A,\in_A)$ az $A$ halmaz $\epsilon$-struktúrája.
+\end{defi}
+\begin{defi}
+$A$ tranzitív halmaz, ha $\forall x (x \in A \Rightarrow x \subseteq A)$. Előbbivel ekvivalens, hogy $y \in x \in A \Rightarrow y \in A$.
+\end{defi}
+\begin{defi} $\alpha$ rendszám, ha tranzitív halmaz és $(\alpha, \in_\alpha)$ jólrendezett.
+\end{defi}
+\begin{exmpl} $\emptyset$, $\lbrace \emptyset, \lbrace \emptyset \rbrace \rbrace$ rendszámok.
+\end{exmpl}
+\begin{defi} Legyen $\alpha, \beta$ rendszám, ekkor $\alpha < \beta$, ha $\alpha \in \beta$.
+\end{defi}
+\begin{theo} Legyen $\alpha, \beta, \gamma$ rendszám, $C$ pedig rendszámokból álló halmaz.
+\begin{enumerate}[(a)]
+\item Ha $x \in \alpha$, akkor $x$ rendszám.
+\item Ha $(\alpha, \in_\alpha) \cong (\beta, \in_\beta)$, akkor $\alpha = \beta$ (mint halmazok).
+\item $\alpha \not < \alpha$, azaz $<$ irreflexív.
+\item $\alpha < \beta$, $\beta < \gamma$, akkor $\alpha < \gamma$, azaz $<$ tranzitív.
+\item $\alpha < \beta$, $\alpha = \beta$, $\beta < \alpha$ közül pontosan az egyik teljesül.
+\item Ha $C \neq \emptyset$, akkor $C$-ben van legkisebb elem.
+\end{enumerate}
+\end{theo}
+\begin{proof} (a) $x$ tranzitív halmaz, ehhez feltesszük, hogy $u \in v \in x$. Kell, hogy $u \in x$. Mivel $\alpha$ tranzitív, ezért $x \subseteq \alpha$, tehát $v \in \alpha$ és ugyanígy $u \in \alpha$. Tehát $\langle u, v \rangle \in \in_\alpha$ és $\langle v, x \rangle \in \in_\alpha$, mivel $\in_\alpha$ tranzitív, ezért $\langle u, x \rangle \in \in_\alpha$, tehát $u \in x$. Mivel $x \subseteq \alpha$, ezért $(x, \in_x)$ részstruktúrája $(\alpha, \in_\alpha)$-nak, így örökli annak tulajdonságait, tehát $(x,\in_x)$ rendezés $x$-en. Jólrendezés is, mert legyen $\emptyset \neq B \subseteq X$, nyilvánvalóan $B \subseteq \alpha$, ekkor a $(\alpha, \in_\alpha)$ szerinti legkisebb elem $B$-ben az $\in_x$ rendezés szerint is legkisebb lesz. Tehát $x$ rendszám. \\
+(b) Tegyük fel, hogy $f : \alpha \rightarrow \beta$ izomorfizmus $(\alpha, \in_\alpha)$ és $(\beta, \in_\beta)$ között. Elég megmutatni, hogy $f = \id_\alpha$. Legyen $A = \lbrace x \in \alpha : f(x)\neq x \rbrace$. Ha $A = \emptyset$, akkor készen vagyunk. Tegyük fel, hogy $A \neq \emptyset$. Tudjuk, hogy $A \subseteq \alpha$, $A$-nak van egy legkisebb $\gamma$ eleme $\in_\alpha$ rendezés szerint. $\gamma \in A \subseteq \alpha$, ezért $\gamma \in \alpha$ és $f(\gamma) \in \beta$. Minden $x \in \alpha$-ra, ha $x \in \gamma \Leftrightarrow x < \gamma \Leftrightarrow f(x) < f(\gamma)$. Valamint $f(x) = x \Leftrightarrow x < f(\gamma) \Leftrightarrow x \in f(\gamma)$. Ezért $f(\gamma) = \gamma$, ellentmondás. \\
+(c) Tegyük fel, hogy $\alpha < \alpha$, amelyből $\alpha \in \alpha$ következik. Tehát $\langle \alpha, \alpha \rangle \in \in_\alpha$, de $\in$ jólrendezi $\alpha$-t, tehát ez ellentmondás. \\
+(d) Tegyük fel, hogy $\alpha < \beta$, valamint $\beta < \gamma$, ekkor $\alpha \in \beta$ és $\beta \in \gamma \Rightarrow \alpha \in \beta \in \gamma$. Mivel $\gamma$ tranzitív, ezért $\alpha \in \gamma$, azaz $\alpha < \gamma$. \\
+(e) A (c) és (d) pontok miatt legfeljebb az egyik teljesülhet. Tegyük fel, hogy $\alpha < \beta$ és $\alpha = \beta$, ekkor $\alpha < \alpha$, ellentmondás. Tegyük fel, hogy $\alpha < \beta$ és $\beta < \alpha$, ekkor $\alpha < \alpha$ a tranzitivitás miatt, ami megint ellentmondás.
+Kell még, hogy az egyik biztosan teljesül, ehhez kimondunk egy lemmát.
+\begin{lem} Ha $\alpha \neq \alpha \cap \beta$, ekkor $\alpha \cap \beta \in \alpha$.
+\end{lem}
+\begin{proof} Tegyük fel, hogy $\alpha \neq \alpha \cap \beta$. Ekkor $\alpha \setminus \alpha \cap \beta \neq \emptyset$, így van benne egy minimális $x$ elem. Megmutatjuk, hogy $x \subset \alpha \cap \beta$. Legyen $y \in x$ tetszőleges, tudjuk, hogy $x \in \alpha$ (mert $\in \alpha \setminus \alpha \cap \beta$) mivel $\alpha$ tranzitív, ezért $y \in \alpha$. Most megmutatjuk, hogy $y \not\in \alpha \setminus \alpha \cap \beta$, amelyből következik, hogy $y \in \alpha \cap \beta$. Ez valóban nem lehet, mert $y \in x \Leftrightarrow y < x$, de $x$ minimális volt $\alpha \setminus \alpha \cap \beta$-ban. \\
+\indent Most megmutatjuk, hogy $\alpha \cap \beta \subset x$. Legyen $u \in \alpha \cap \beta$. Tudjuk, hogy $u,x \in \alpha$, ezért $\in_\alpha$ trichotómiája miatt $u \in x$ vagy $u = x$ vagy $x \in u$. Utóbbi kettő nem teljesül, mert:
+\begin{itemize}
+\item ha $u=x$, akkor $u \in \alpha \cap \beta$ és $x \in \alpha \cap \beta$ ellentmondást okoz,
+\item ha $x \in u$, akkor $x \in u \in \alpha \cap \beta$ miatt $u \in \alpha$ és $u \in \beta$. $\alpha, \beta$ tranzitív, ezért $x \in \alpha$ és $x \in \beta$ is teljesül, azaz $x \in \alpha \cap \beta$, ami ellentmondás, hiszen $x \in \alpha \setminus \alpha \cap \beta$.
+\end{itemize}
+Megmutattuk, hogy $u \in x$ fennáll, tehát $\alpha \cap \beta \subset x$. Megkaptuk, hogy $\alpha \cap \beta = x$ és $x \in \alpha$.
+\end{proof}
+Folytatva (e) pont bizonyítását négy különböző esetet találunk:
+\begin{enumerate}
+\item $\alpha = \alpha \cap \beta = \beta$, ekkor $\alpha = \beta$.
+\item $\alpha = \alpha \cap \beta \neq \beta$, ekkor 9.1 lemma miatt $\alpha \cap \beta = \alpha \in \beta$, azaz $\alpha < \beta$.
+\item $\alpha \neq \alpha \cap \beta = \beta$, ekkor 9.1 lemma miatt $\alpha \cap \beta = \beta \in \alpha$, azaz $\beta < \alpha$.
+\item $\alpha \neq \alpha \cap \beta \neq \beta$, ami pedig nem lehet, mert 9.1 lemma miatt $\alpha \cap \beta \in \alpha$ és $\alpha \cap \beta \in \beta$, ami miatt $\alpha \cap \beta \in \alpha \cap \beta = \gamma$ ($\gamma$ rendszám (a) pont miatt) és így $\langle \alpha \cap \beta, \alpha \cap \beta \rangle \in \in_\gamma$ ellentmond az irreflexivitásnak.
+\end{enumerate}
+Következzen az (f) pont bizonyítása. Tegyük fel, hogy $C \neq \emptyset$, ekkor legyen $\alpha \in C$ tetszőleges. Ha $\alpha \cap C = \emptyset$, akkor $\alpha$ a $C$ legkisebb eleme, mert ha lenne $\beta \in C$ úgy, hogy $\beta < \alpha$, akkor $\beta \in \alpha \cap C$ lenne. Ha $\alpha \cap C \neq \emptyset$, akkor $\alpha \cap C$ jólrendezett, mert $\alpha$ rendszám, így van benne egy legkisebb $\alpha'$ elem, ekkor $\alpha' \cap C = \emptyset$. Ha nem így lenne, akkor létezne egy $y \in \alpha'$ és $y \in C$ elem, ekkor $y < \alpha'$, de $\alpha'$ legkisebb elem, ellentmondás.
+\end{proof}
+\begin{theo} Legyen $\varphi$ formula, ha létezik $\varphi$ tulajdonságú rendszám, akkor van legkisebb $\varphi$ tulajdonságú rendszám. Más szavakkal: rendszámok nemüres halmazának van legkisebb eleme.
+\end{theo}
+\begin{proof}
+Tegyük fel, hogy $\alpha$ egy rendszám és $\varphi(\alpha)$, azaz $\varphi$ tulajdonságú. Legyen $C= \lbrace \beta \in \alpha : \varphi(\beta) \rbrace$. Ha $C = \emptyset$, akkor $\alpha$ a legkisebb elem. Ha $C \neq \emptyset$, akkor 9.1 tétel (f) pontja miatt van benne legkisebb elem.
+\end{proof}
+\begin{defi} $\On = \lbrace x : x \text{ rendszám} \rbrace$.
+\end{defi}
+\begin{state} $\On$ osztály, de nem halmaz.
+\end{state}
+\begin{proof} Osztály, azaz azonos tulajdonságú elemek összessége. Mivel a rendszám definíciója formalizálható, ezért a rendszámok osztályt alkotnak. Ellentmondást keresve tegyük fel, hogy $\On$ halmaz, ekkor tranzitív is, mert $y \in x \in \On$ esetén 9.1. tétel (a) pontja miatt $y$ rendszám és ezért $y \in \On$. A 9.1. tétel (c), (d), (e), (f) pontjai miatt $(\On,\in_{\On})$ jólrendezett, azaz $\On$ rendszám és így $\On \in \On$ ellentmondás lenne.
+\end{proof}
+\begin{defi} Legyen $x$ halmaz. Az $S(x)= x \cup \lbrace x \rbrace$ az $x$ rákövetkezője.
+\end{defi}
+\begin{state} Ha $\alpha$ rendszám, akkor $S(\alpha)$ rendszám és $S(\alpha)$ az $\alpha$-nál nagyobb rendszámok közül a legkisebb.
+\end{state}
+\begin{proof} Tegyük fel, hogy $x \in y \in S(\alpha)$, ekkor $y \in \alpha$ vagy $y = \alpha$. Ha $y \in \alpha$, akkor $\alpha$ tranzitivitása miatt $x \in \alpha$. Ha $y = \alpha$, akkor $x \in \alpha$. Ezért $x \in S(\alpha)$. $S(\alpha)$-ban $\alpha$-hoz képest egy darab új $\lbrace \alpha \rbrace$ elem van, amely nagyobb $\alpha$ összes eleménél, így $(S(\alpha), \in_{S(\alpha)} )$ jólrendezés. Megmutattuk, hogy $S(\alpha)$ rendszám. \\
+\indent Mivel $\alpha \in S(\alpha)$, ezért $\alpha < S(\alpha)$ és ha $\beta < S(\alpha)$, akkor $\beta \in S(\alpha) \Rightarrow$ $\beta \in \alpha$ vagy $\beta = \alpha \Rightarrow \beta \subseteq \alpha$, így $\alpha$ és $S(\alpha)$ közt további rendszám már nincs.
+\end{proof}
